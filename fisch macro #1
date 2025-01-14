@@ -1,0 +1,167 @@
+#SingleInstance, force
+#NoEnv
+SetCapsLockState, Off
+SetBatchLines, -1
+SetMouseDelay, -1
+CoordMode, Pixel, Window
+CoordMode, Mouse, Window
+
+Files:
+IfNotExist, %A_ScriptDir%\images
+{
+	msgbox,, file missing, extract the "images" file,3
+	ExitApp
+}
+
+MsgBox, 0,Tutorial, F1 to activate macro & F2 to Stop., 5
+MsgBox, 0,Remember, Put the Fishing Rod on the tool number "2" and "Fist" on "1"., 5
+MsgBox, 0,Remember, Also remove all your tools from the toolbar leaving only Fist (1) and Fishing Rod (2)., 5
+MsgBox, 0,Remember, Subscribe to xGonca!, 5
+
+F2::ExitApp
+
+F1::
+macro_on := !macro_on
+if (macro_on)
+fishing = false
+
+
+Equipfishing:
+{
+	SendInput, 1
+	Sleep, 300
+	SendInput, 2
+	Sleep, 300
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 60
+	SendInput, i
+	Sleep, 150
+	SendInput, o
+	Sleep, 150
+	MouseMove, 407, 251, 10
+	Sleep, 300
+	Click
+	Sleep, 350
+	SendInput, o
+	Sleep, 60
+	SendInput, o
+	Sleep, 60
+	SendInput, o
+	Sleep, 60
+	SendInput, o
+	Sleep, 60
+	fishing = true
+	Goto, Waiting
+}
+Return
+
+
+Waiting:
+{
+	Loop,
+	  {
+		ImageSearch, x, y, 0, 0,0,0, *30  C:\Jogos\Outros\Fishing\images\white
+		If ErrorLevel = 0
+			{
+			Sleep, 200
+			MouseMove, 409, 531, 10
+			Sleep, 200
+			Goto, Fishing	
+			}		
+	  }
+}		
+Return
+
+Fishing:
+Sleep, 500
+{
+	Loop,
+		{
+		ImageSearch, x, y, 337, 456, 477, 483, *30 C:\Jogos\Outros\Fishing\images\yellow
+		If ErrorLevel = 0
+		  {
+		   Click
+		   Sleep, 50
+		  }
+		ImageSearch, x, y, 337, 456, 477, 483, *30 C:\Jogos\Outros\Fishing\images\yellow
+		If ErrorLevel = 0
+		  {
+		   Click
+		   Sleep, 50
+		  }
+		ImageSearch, x, y, 330, 207, 497, 290, *30 C:\Jogos\Outros\Fishing\images\fish
+		If ErrorLevel = 0
+		  {
+		  Sleep, 500
+		  SendInput, e
+		  Sleep, 300
+		  SendInput, e
+		  Sleep, 150
+		  Goto, Equipfishing
+		  }
+		}
+Goto, Equipfishing
+}
+Return
